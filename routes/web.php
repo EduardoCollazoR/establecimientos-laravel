@@ -23,6 +23,6 @@ Auth::routes(['verify' => true]);
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/establecimiento/create', [EstablecimientoController::class, 'create'])->name('establecimiento.create');
-    Route::get('/establecimiento/edit', [EstablecimientoController::class, 'edit'])->name('establecimiento.edit');
+    Route::get('/establecimientos/create', [EstablecimientoController::class, 'create'])->name('establecimiento.create');
+    Route::get('/establecimientos/edit', [EstablecimientoController::class, 'edit'])->name('establecimiento.edit');
 });
