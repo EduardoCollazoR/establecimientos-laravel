@@ -12,6 +12,8 @@
 <!-- Load Esri Leaflet Geocoder from CDN -->
 <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.1/dist/esri-leaflet-geocoder.js" integrity="sha512-enHceDibjfw6LYtgWU03hke20nVTm+X5CRi9ity06lGQNtC9GkBNl/6LoER6XzSudGiXy++avi1EbIg9Ip4L1w==" crossorigin=""></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 @endsection
 
 @section('content')
@@ -63,7 +65,7 @@
                 </div>
 
             </fieldset>
-            <fieldset class="border p-4">
+            <fieldset class="border p-4 mt-5">
                 <legend class="text-primaty">Ubicacion:</legend>
 
                 <div class="form=group">
@@ -110,11 +112,71 @@
                 <input type="hidden" name="lat" id="lat" value="{{old('lat')}}">
                 <input type="hidden" name="lng" id="lng" value="{{old('lng')}}">
             </fieldset>
+            <fieldset class="border p-4 mt-5">
+                <legend class="text-primary">Información Establecimiento: </legend>
+                <div class="form-group">
+                    <label for="nombre">Teléfono</label>
+                    <input type="tel" class="form-control @error('telefono')  is-invalid  @enderror" id="telefono" placeholder="Teléfono Establecimiento" name="telefono" value="{{ old('telefono') }}">
+
+                    @error('telefono')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="nombre">Descripción</label>
+                    <textarea class="form-control  @error('descripcion')  is-invalid  @enderror" name="descripcion">{{ old('descripcion') }}</textarea>
+
+                    @error('descripcion')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Hora Apertura:</label>
+                    <input type="time" class="form-control @error('apertura')  is-invalid  @enderror" id="apertura" name="apertura" value="{{ old('apertura') }}">
+                    @error('apertura')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="nombre">Hora Cierre:</label>
+                    <input type="time" class="form-control @error('cierre')  is-invalid  @enderror" id="cierre" name="cierre" value="{{ old('cierre') }}">
+                    @error('cierre')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+            </fieldset>
+
+            </fieldset>
+            <fieldset class="border p-4 mt-5">
+                <legend class="text-primaty">Ubicacion:</legend>
+
+                <div class="form=group">
+                    <label for="imagenes"></label>
+                    <div id="dropzone" class="dropzone form-control"></div>
+                </div>
+            </fieldset>
+
+            <input type="hidden" id="uuid" name="uuid" value="{{Str::uuid()->toString()}}">
+            <input type="submit" class="btn btn-primary mt-3 d-block" value="Registrar establecimiento">
         </form>
     </div>
 </div>
 @endsection
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js" integrity="sha512-U2WE1ktpMTuRBPoCFDzomoIorbOyUv0sP8B+INA3EzNAhehbzED1rOJg6bCqPf/Tuposxb5ja/MAUnC8THSbLQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
 @endsection

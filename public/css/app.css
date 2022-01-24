@@ -11286,3 +11286,65 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #f8fafc;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+  font-weight: 900;
+  color: #6610f2;
+}
+
+#dropzone {
+  height: auto;
+}
+
+.text-primary {
+  color: #6610f2 !important;
+}
+
+.navbar.bg-white {
+  background-color: #6610f2 !important;
+}
+.navbar.bg-white a {
+  color: white !important;
+}
+
+.navbar-nav .dropdown-menu {
+  background: #6610f2;
+}
+.navbar-nav .dropdown-menu a:hover {
+  background: #6610f2;
+}
+
+.navbar.bg-white .navbar-brand {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+legend {
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  width: auto;
+}
+
+.btn-primary {
+  background-color: #6610f2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.btn-primary:hover {
+  background-color: #510bc4;
+}
+
+.alert-primary {
+  background: transparent;
+  text-align: center;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #6610f2;
+}
