@@ -20,49 +20,47 @@
 <div class="container">
     <h1 class="text-center mt-4">Registrar Establecimiento</h1>
     <div class="mt-5 row justify-content-center">
-        <form class="col-md-9 col-xs-12 card card-body">
+        <form class="col-md-9 col-xs-12 card card-body" action="{{ route('establecimiento.store')}}" method="post" enctype="multipart/form-data" <fieldset class="border p-4">
+            <legend class="text-primaty">Nombre y Categoria e Imagen principal</legend>
 
-            <fieldset class="border p-4">
-                <legend class="text-primaty">Nombre y Categoria e Imagen principal</legend>
-
-                <div class="form=group">
-                    <label class="" for="nombre">Nombre Establecimiento</label>
-                    <input id="nombre" type="text" name="nombre" class="form-control @error('nombre') is-invalid
+            <div class="form=group">
+                <label class="" for="nombre">Nombre Establecimiento</label>
+                <input id="nombre" type="text" name="nombre" class="form-control @error('nombre') is-invalid
                     @enderror" placeholder="Nombre establecimiento" value="{{old('nombre')}}">
-                    @error('nombre')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-
-                    @enderror
-
-                    </input>
+                @error('nombre')
+                <div class="invalid-feedback">
+                    {{$message}}
                 </div>
 
-                <div class="form-group">
-                    <label for="categoria">Categoria</label>
-                    <select class="form-control" name="categoria_id" ype="text" name="nombre" class="form-control @error('categoria_id') is-invalid
+                @enderror
+
+                </input>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select class="form-control" name="categoria_id" ype="text" name="nombre" class="form-control @error('categoria_id') is-invalid
                     @enderror" id="categoria">
-                        <option value="" selected disabled>--Seleccione--</option>
-                        @foreach ($categorias as $categoria )
-                        <option value="{{$categoria->id}}" {{old('categoria_id')==$categoria->id ? 'selected':''}}>{{ $categoria->nombre}}</option>
+                    <option value="" selected disabled>--Seleccione--</option>
+                    @foreach ($categorias as $categoria )
+                    <option value="{{$categoria->id}}" {{old('categoria_id')==$categoria->id ? 'selected':''}}>{{ $categoria->nombre}}</option>
 
-                        @endforeach
-                    </select>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form=group">
+                <label class="" for="imagen_principal">Imagen principal</label>
+                <input id="imagen_principal" type="file" name="imagen_principal" class=" form-control @error('imagen_principal') is-invalid @enderror" value="{{old('imagen_principal')}}">
+                @error('imagen_principal')
+                <div class="invalid-feedback">
+                    {{$message}}
                 </div>
 
-                <div class="form=group">
-                    <label class="" for="imagen_principal">Imagen principal</label>
-                    <input id="imagen_principal" type="file" name="imagen_principal" class=" form-control @error('imagen_principal') is-invalid @enderror" value="{{old('imagen_principal')}}">
-                    @error('imagen_principal')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
+                @enderror
 
-                    @enderror
-
-                    </input>
-                </div>
+                </input>
+            </div>
 
             </fieldset>
             <fieldset class="border p-4 mt-5">
@@ -87,7 +85,7 @@
                     <label class="direccion">Direccion</label>
                     <input type="text" id="direccion" class="form-control @error('direccion') is-invalid
 
-                    @enderror" placeholder="Direccion" value="{{old('direccion')}}">
+                    @enderror" placeholder="Direccion" value="{{old('direccion')}}" name="direccion">
                     @error('direccion')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -100,7 +98,7 @@
                     <label class="colonia">Colonia</label>
                     <input type="text" id="colonia" class="form-control @error('colonia') is-invalid
 
-                    @enderror" placeholder="Colonia" value="{{old('colonia')}}">
+                    @enderror" placeholder="Colonia" value="{{old('colonia')}}" name="colonia">
                     @error('colonia')
                     <div class="invalid-feedback">
                         {{$message}}

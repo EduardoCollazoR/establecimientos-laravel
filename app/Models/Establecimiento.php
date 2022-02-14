@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Establecimiento extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'categoria_id',
+        'imagen_principal',
+        'colonia',
+        'lat',
+        'lng',
+        'telefono',
+        'descripcion',
+        'apertura',
+        'cierre',
+        'uuid'
+    ];
 }

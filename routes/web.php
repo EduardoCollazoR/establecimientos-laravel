@@ -25,7 +25,12 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/establecimientos/create', [EstablecimientoController::class, 'create'])->name('establecimiento.create');
+
+    Route::post('/establecimiento', [EstablecimientoController::class, 'store'])->name('establecimiento.store');
+
     Route::get('/establecimientos/edit', [EstablecimientoController::class, 'edit'])->name('establecimiento.edit');
 
     Route::post('/imagenes/store', [ImagenController::class, 'store'])->name('imagenes.store');
+
+    Route::post('/imagenes/destroy', [ImagenController::class, 'destroy'])->name('imagenes.destroy');
 });
