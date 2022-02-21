@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstablecimientoController;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\InicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,7 @@ use App\Http\Controllers\ImagenController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [InicioController::class])->name('inicio');
 
 Auth::routes(['verify' => true]);
 
