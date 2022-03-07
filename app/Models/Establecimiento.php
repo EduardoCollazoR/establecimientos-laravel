@@ -22,4 +22,9 @@ class Establecimiento extends Model
         'cierre',
         'uuid'
     ];
+
+    public function  categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
 }
