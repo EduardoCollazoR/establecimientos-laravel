@@ -21,9 +21,11 @@
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12",
+        "vue2-leaflet": "^2.7.1",
         "vuex": "^4.0.2"
     },
     "dependencies": {
+        "leaflet": "^1.7.1",
         "leaflet-geosearch": "^3.6.0",
         "vue-router": "^4.0.13"
     }
