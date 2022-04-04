@@ -18,17 +18,18 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-center mt-4">Registrar Establecimiento</h1>
+    <h1 class="text-center mt-4">Editar Establecimiento</h1>
     <div class="mt-5 row justify-content-center">
-        <form class="col-md-9 col-xs-12 card card-body" action="{{ route('establecimiento.store')}}" method="POST" enctype="multipart/form-data">
+        <form class="col-md-9 col-xs-12 card card-body" action="{{ route('establecimiento.update',['establecimiento' => $establecimiento->id])}}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <fieldset class="border p-4">
                 <legend class="text-primaty">Nombre y Categoria e Imagen principal</legend>
 
                 <div class="form=group">
                     <label class="" for="nombre">Nombre Establecimiento</label>
                     <input id="nombre" type="text" name="nombre" class="form-control @error('nombre') is-invalid
-                    @enderror" placeholder="Nombre establecimiento" value="{{old('nombre')}}">
+                    @enderror" placeholder="Nombre establecimiento" value="{{$establecimiento->nombre}}">
                     @error('nombre')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -45,7 +46,7 @@
                     @enderror" id="categoria">
                         <option value="" selected disabled>--Seleccione--</option>
                         @foreach ($categorias as $categoria )
-                        <option value="{{$categoria->id}}" {{old('categoria_id')==$categoria->id ? 'selected':''}}>{{ $categoria->nombre}}</option>
+                        <option value="{{$categoria->id}}" {{$establecimiento->categoria_id==$categoria->id ? 'selected':''}}>{{ $categoria->nombre}}</option>
 
                         @endforeach
                     </select>
@@ -61,7 +62,7 @@
 
                     @enderror
 
-                    </input>
+                    <img style="width:200px; margin-top:20px;" src="/storage/{{$establecimiento->imagen_principal}}">
                 </div>
 
             </fieldset>
@@ -87,7 +88,7 @@
                     <label class="direccion">Direccion</label>
                     <input type="text" id="direccion" class="form-control @error('direccion') is-invalid
 
-                    @enderror" placeholder="Direccion" value="{{old('direccion')}}" name="direccion">
+                    @enderror" placeholder="Direccion" value="{{$establecimiento->direccion}}" name="direccion">
                     @error('direccion')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -100,7 +101,7 @@
                     <label class="colonia">Colonia</label>
                     <input type="text" id="colonia" class="form-control @error('colonia') is-invalid
 
-                    @enderror" placeholder="Colonia" value="{{old('colonia')}}" name="colonia">
+                    @enderror" placeholder="Colonia" value="{{$establecimiento->colonia}}" name="colonia">
                     @error('colonia')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -109,14 +110,14 @@
                     @enderror
                 </div>
 
-                <input type="hidden" name="lat" id="lat" value="{{old('lat')}}">
-                <input type="hidden" name="lng" id="lng" value="{{old('lng')}}">
+                <input type="hidden" name="lat" id="lat" value="{{$establecimiento->lat}}">
+                <input type="hidden" name="lng" id="lng" value="{{$establecimiento->lng}}">
             </fieldset>
             <fieldset class="border p-4 mt-5">
                 <legend class="text-primary">Información Establecimiento: </legend>
                 <div class="form-group">
                     <label for="nombre">Teléfono</label>
-                    <input type="tel" class="form-control @error('telefono')  is-invalid  @enderror" id="telefono" placeholder="Teléfono Establecimiento" name="telefono" value="{{ old('telefono') }}">
+                    <input type="tel" class="form-control @error('telefono')  is-invalid  @enderror" id="telefono" placeholder="Teléfono Establecimiento" name="telefono" value="{{$establecimiento->telefono }}">
 
                     @error('telefono')
                     <div class="invalid-feedback">
@@ -129,7 +130,7 @@
 
                 <div class="form-group">
                     <label for="nombre">Descripción</label>
-                    <textarea class="form-control  @error('descripcion')  is-invalid  @enderror" name="descripcion">{{ old('descripcion') }}</textarea>
+                    <textarea class="form-control  @error('descripcion')  is-invalid  @enderror" name="descripcion">{{ $establecimiento->descripcion }}</textarea>
 
                     @error('descripcion')
                     <div class="invalid-feedback">
@@ -140,7 +141,7 @@
 
                 <div class="form-group">
                     <label for="nombre">Hora Apertura:</label>
-                    <input type="time" class="form-control @error('apertura')  is-invalid  @enderror" id="apertura" name="apertura" value="{{ old('apertura') }}">
+                    <input type="time" class="form-control @error('apertura')  is-invalid  @enderror" id="apertura" name="apertura" value="{{ $establecimiento->apertura }}">
                     @error('apertura')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -150,7 +151,7 @@
 
                 <div class="form-group">
                     <label for="nombre">Hora Cierre:</label>
-                    <input type="time" class="form-control @error('cierre')  is-invalid  @enderror" id="cierre" name="cierre" value="{{ old('cierre') }}">
+                    <input type="time" class="form-control @error('cierre')  is-invalid  @enderror" id="cierre" name="cierre" value="{{$establecimiento->cierre}}">
                     @error('cierre')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -161,16 +162,24 @@
 
             </fieldset>
             <fieldset class="border p-4 mt-5">
-                <legend class="text-primaty">imagenes establecimiento:</legend>
+                <legend class="text-primaty">Imagenes establecimiento:</legend>
 
                 <div class="form=group">
                     <label for="imagenes"></label>
                     <div id="dropzone" class="dropzone form-control"></div>
                 </div>
+
+                @if(count($imagenes)>0)
+                @foreach ($imagenes as $imagen)
+
+                <input class="galeria" type="hidden" value="{{$imagen->ruta_imagen}}">
+
+                @endforeach
+                @endif
             </fieldset>
 
-            <input type="hidden" id="uuid" name="uuid" value="{{Str::uuid()->toString()}}">
-            <input type="submit" class="btn btn-primary mt-3 d-block" value="Registrar establecimiento">
+            <input type="hidden" id="uuid" name="uuid" value="{{$establecimiento->uuid}}">
+            <input type="submit" class="btn btn-primary mt-3 d-block" value="Guardar cambios">
         </form>
     </div>
 </div>
